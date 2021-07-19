@@ -2,6 +2,7 @@ import './sass/main.scss';
 import countryTpl from './templates/countryTpl.hbs';
 import countriesListTpl from './templates/countriesListTpl.hbs';
 import fetchCountries from './js/fetchCountries.js';
+import errorMessage from './js/pnotify.js';
 
 const debounce = require('lodash.debounce');
 
@@ -26,9 +27,9 @@ function onCountryInput(e) {
 
     const searchWord = e.target.value;
     fetchCountries(searchWord)
-    .then(renderCorrectMarkup)
-    .catch(error => console.log(error))
-    .finally(() => refs.input.value = '');
+        .then(renderCorrectMarkup)
+        .catch(onCatch);
+    // .finally(() => refs.input.value = '');
 
 }
 
@@ -50,5 +51,12 @@ function renderCorrectMarkup (countries) {
     } else 
     if (countries.length >= 2 && countries.length <= 10) {
         renderCountriesList(countries);
-    };  
+        }
+    else {
+        errorMessage();
+    }
+};
+
+function onCatch(mistake) {
+    alert(`${mistake}`)
 };
