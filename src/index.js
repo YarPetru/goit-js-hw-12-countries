@@ -35,14 +35,18 @@ function onCountryInput(e) {
 
 
 function renderCountryInfo(countries) {
-     countries.forEach(country => { 
-        refs.render.innerHTML = countryTpl(country);
-    });
+    const markupCountry = countryTpl(countries[0]);
+    refs.render.innerHTML = markupCountry;
+    //  countries.forEach(country => { 
+    //     refs.render.innerHTML = countryTpl(country);
+    // });
 }
 
 function renderCountriesList(countries) {
-    const countriesArray = countries.map(country => country.name);    
-    refs.render.innerHTML = countriesListTpl(countriesArray);
+    const markupList = countriesListTpl(countries.map(country => country.name));
+    refs.render.innerHTML = markupList;
+    // const countriesArray = countries.map(country => country.name);    
+    // refs.render.innerHTML = countriesListTpl(countriesArray);
 };
 
 function renderCorrectMarkup (countries) {
